@@ -1,0 +1,83 @@
+\documentclass[
+	ngerman,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage[bf]{caption} 
+	\captionsetup{format=plain}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+
+\usepackage{tikz}
+	\usetikzlibrary{calc}
+	\usetikzlibrary{positioning}
+	
+\begin{document}
+
+\part*{C-Kurs, Blatt 04, WiSe 2020}
+
+\section{Primzahlsieb}
+Schreiben Sie ein Programm, das alle Primzahlen zwischen $2$ und einer anderen Zahl $N$ berechnet.
+
+Ein Schnelles Verfahren dafür ist das \emph{Sieb des Eratosthenes}\footnote
+	{Eratosthenes von Kyrene, geboren zwischen 276 und 273 BCE}:
+Erstellen Sie dazu zuerst ein {\em dynamisches} Array der Länge $N+1$ und füllen Sie es mit den Zahlen von $0$ bis $N$. Dann beginnen Sie mit der $2$ und eliminieren alle Zahlen, die Vielfache von $2$ sind (z,\,B. indem Sie die entsprechenden Array-Einträge auf $0$ setzen). 
+Dann fahren Sie mit der nächsten -- noch nicht eleminierten -- Zahl fort (hier die $3$) und eliminieren dann alle Vielfachen, etc.
+
+Wenn es richtig programmiert ist, können sie alle Primzahlen zwischen $2$ und $1.000.000$ in deutlich weniger als einer Sekunde Berechnen. Dazu sollten Sie ohne Division (das heißt auch ohne den Modulo-Operator \texttt{\%}) auskommen!
+
+\emph{Lernziel: dynamische Arrays (calloc/malloc), Schleifen, if-else}
+
+OPTIONAL können Sie den Speicherbedarf für diese Aufgabe optimieren:\\
+Ob eine Zahl prim oder nicht ist, ist eine ja/nein-Frage, braucht also nur ein einziges Bit Speicherbedarf. Statt die gesamte Zahl zu speichern, können Sie also dafür sorgen, dass das n-te Bit in einem Array gesetzt ist (den Wert 1 hat), wenn die Zahl n prim ist, oder nicht gesetzt ist (den Wert 0 hat), wenn die Zahl teilbar ist.\\
+\emph{Diese optionale Zusatz-Aufgabe erweitert die geübten Techniken um bitweise Logik.}
+
+
+\section{Primfaktorzerlegung}
+Schreiben Sie eine Funktion, der eine natürliche Zahl übergeben wird, und die ein dynamisches Array ihrer Primfaktoren zurück gibt. Vergessen Sie nicht, dieses Array wieder freizugeben!
+
+\emph{Tipp: Sie können diese Aufgabe lösen, ohne explizit Primzahlen zu ermitteln.}
+
+\emph{Lernziel: dynamische Arrays (realloc), Schleifen, if-else, Funktionen}
+
+\section{Binärdarstellung}
+Lesen Sie eine Ganzzahl ein und geben Sie deren Bitmuster aus (z.B.: 23 $\rightarrow$ 00010111).
+
+\emph{Lernziel: Bitweise Logik}
+
+\section{Selection Sort}
+Schreiben Sie ein Sortierprogramm, das nach dem Selection-Sort Algorithmus arbeitet: 
+\begin{enumerate}
+\item Suche das kleinste (oder größte) Element des Arrays
+\item Vertausche dieses mit dem ersten Element des Arrays
+\item Gehe wieder zu Schritt 1, jetzt aber mit dem verkürzten Array
+\end{enumerate}
+Wieso ist dieses Verfahren effizienter als Bubble-Sort?
+
+\emph{Lernziel: Schleifen}
+
+\section{Palindrome}
+Schreiben Sie eine Funktion \mintinline{c}{int palin(char *c)}, die prüfen soll, ob ein gegebenes Wort oder ein Satz ein Palindrom ist. 
+
+(\emph{Ein Palindrom ist eine Zeichenkette, die \enquote{von hinten} und \enquote{von vorne} gelesen gleich aussieht. Beispiele:} Otto; Able was I ere I saw Elba)
+\end{document}
+

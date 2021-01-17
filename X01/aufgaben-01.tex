@@ -1,0 +1,130 @@
+\documentclass[
+	ngerman,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+
+\usepackage{hyperref}
+
+\usepackage{minted}
+	\usemintedstyle{friendly}
+
+\newcommand*{\inC}[1]{\mintinline{c}{#1}}
+	
+\begin{document}
+
+\part*{C-Kurs, Blatt 01, WiSe 2020}
+
+\section{Arbeitsumgebung Testen}
+Falls nicht schon geschehen: Stellen Sie sicher, dass Ihr Computer zum Programmieren in C korrekt eingerichtet ist. Ein Tutorial hierzu ist auf der Kursbeschreibung-Seite der Fakultät Physik verlinkt \url{https://www.ur.de/physik/fakultaet/studium/it-ausbildung/c-und-c/index.html}:
+\begin{itemize}
+\item Falls Sie Windows benutzen, ist eine ausführliche Beschreibung zu finden unter: \\
+	\url{https://www.ur.de/index.php?eID=dumpFile&t=f&f=31172&token=1aa112092627980ac2e917ae7765e65a303b9159} \\
+	Zusätzlich sollten Sie den Editor notepad++ installieren.\\
+	(Quelle: \url{https://notepad-plus-plus.org/downloads/v7.8.9/})
+\item Falls Sie Mac-UserIn sind, installieren Sie das Programm xcode aus dem Appstore.
+\item Falls Sie Linux benutzen, ist der gcc bereits installiert und eingerichtet. Installieren ggf. Sie einen Code-Editor wie gedit, kate oder geany. Diese sind in den
+	üblichen Repositories frei verfügbar.
+\end{itemize}
+
+Laden Sie die Datei \texttt{chameleon.c} herunter, kompilieren Sie diese entweder mit der Zeile
+\begin{center}
+\texttt{gcc -std=c11 -Wall -Wextra -Wpedantic chameleon.c -o chameleon.exe} (Windows)
+\end{center}
+oder
+\begin{center}
+\texttt{gcc -std=c11 -Wall -Wextra -Wpedantic chameleon.c -o chameleon} (Linux und Mac)
+\end{center}
+
+Führen Sie das Programm aus.
+
+Falls Sie hierbei Probleme haben, wenden Sie sich an die TutorInnen.
+%\clearpage
+
+
+
+\section{Hallo!}
+Schreiben Sie ein Programm, das den Benutzer begrüßt. Benutzen Sie also \inC{printf}, um eine Nachricht auszugeben.
+
+
+\section{Operatoren}
+Belegen Sie zwei \inC{int}-Variablen mit den Werten 7 und 5 und geben Sie deren Summe, Produkt, Differenz und Quotienten aus. Was müssen Sie tun, damit bei der Division das Ergebnis \texttt{1.400000} angezeigt wird?
+
+
+\section{Modulo}
+Geben Sie mithilfe des Modulo-Operators \texttt{\%} die letzte Ziffer der in einer Variablen gespeicherten Ganzzahl (\inC{int}) aus.
+
+\emph{Hinweis: der Modulo-Operator gibt den Teilungsrest  zurück, also:}
+\begin{center}
+\texttt{ 9 \% 4 == 1}\\
+\texttt{10 \% 4 == 2}\\
+\texttt{11 \% 4 == 3}\\
+\texttt{12 \% 4 == 0}
+\end{center}
+(denn 12 ist durch 4 ohne Rest teilbar)
+
+\section{if-else und scanf}
+Lesen Sie mit \texttt{scanf} eine \mintinline{c}{float}-Zahl $t$ ein. Prüfen Sie, ob \mbox{$1 + t$} größer als $1$ ist. 
+
+\emph{Optional}: Geben Sie \texttt{1e-20} ein. (Dies ist die Notation für $10^{-20}$.) Warum behauptet Ihr Programm, dass $1 + 10^{-20} \leq 1$?
+
+\emph{Lernziel: if/else}
+
+
+\section{Schaltjahr}
+In unserem Kalender sind zum Ausgleich der astronomischen und kalendarischen
+Jahreslänge in regelmäßigen Abständen Schaltjahre eingebaut.
+Zur exakten Festlegung der Schaltjahre dienen die folgenden Regeln:
+
+\begin{itemize}
+  \item Ist die Jahreszahl durch 4 teilbar,
+  so ist das Jahr ein Schaltjahr. Diese Regel hat allerdings eine Ausnahme: 
+  \item Ist die Jahreszahl durch 100 teilbar,
+  so ist das Jahr kein Schaltjahr. Diese Ausnahme hat 
+  wiederum eine Ausnahme: 
+  \item Ist die Jahreszahl durch 400 teilbar, so ist das Jahr doch ein Schaltjahr. 
+\end{itemize}
+Erstellen Sie ein Programm, das berechnet, ob eine vom Benutzer eingegebene Jahreszahl ein 
+Schaltjahr bezeichnet oder nicht.
+
+Tipp: Sie können das entweder mit verschachtelten if-else-Anweisungen lösen,
+oder mit logischen Operatoren wie \texttt{\&\&} oder \texttt{||}.
+Optional können Sie beide Varianten versuchen.
+
+Tipp: Sparen Sie sich Zeit, und verzichten Sie zum Testen zuerst auf die Usereingabe mit \inC{scanf}. Benutzen Sie stattdessen zuerst einen festen Wert \inC{int year = 2020;}, und ändern Sie diese Zeile, um verschiedene Fälle zu testen.
+
+\emph{Lernziel: if/else, Operatoren}
+
+
+\section{Optional: Darstellung}
+Speichern Sie die Zahl $65$ in einer \inC{int}-Variablen,
+und geben Sie diese einmal mit dem Format \texttt{\%d},
+mit dem Format \verb`%x` und dem Format \verb`%c` aus.
+Erhöhen Sie die Variable um $1$ (dann um $2$, umd $3$...)
+und geben Sie sie wieder aus. 
+Wie könnte man das veränderte Ergebnis erklären?
+
+Tipp: Geben Sie in die Konsole ein: \texttt{man ascii}
+
+
+\section{Optional: Quadratische Gleichung}
+Lösen Sie die quadratische Gleichung $a\,x^2+b\,x+c=0$ für vom Benutzer
+(mit \texttt{scanf}) eingegebene Parameter $a$, $b$ und $c$.
+Bestimmen Sie, ob die Gleichung überhaupt lösbar ist.
+(Wenn Sie mit komplexen Zahlen vertraut sind, können dann
+auch die komplexe Lösung ausgeben.)
+
+Die Lösungsformel lautet
+\[x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4\,a\,c}}{2\,a}\]
+
+\end{document}

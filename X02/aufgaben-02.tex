@@ -1,0 +1,127 @@
+\documentclass[
+	ngerman,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{amsmath}
+
+\usepackage{minted}
+	\usemintedstyle{friendly}
+
+\begin{document}
+
+\part*{C-Kurs, Blatt 02, WiSe 2020}
+
+
+\section{Taschenrechner}
+
+Programmieren Sie mithilfe der \mintinline{c}{switch} Anweisung einen Mini-Taschenrechner,
+der zwei Zahlen und einen Operator (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/})
+einliest und das Ergebnis ausgibt.
+Eine eventuelle Division durch 0 soll abgefangen werden.
+
+\emph{Lernziel: switch-case}
+
+\section{Verzinsung}
+
+Schreiben Sie ein Programm, das zu einem gegebenen Anfangskapital
+bei einem vorgegebenem jährlichen Zinssatz berechnet,
+wie viele Jahre benötigt werden, damit das Kapital eine 
+bestimmte Zielsumme überschreitet. 
+
+Mit anderen Worten: Das Programm soll Startkapital, Zielkapital
+und den Zinssatz einlesen, und berechen, wie viele Jahre man sparen muss
+(\emph{mit Zinseszins!}) bis das Zielkapital erreicht ist.
+
+Lösen Sie diese Aufgabe \emph{ohne} die Verwendung
+des Logarithmus (\texttt{log}) und \emph{ohne} die Verwendung
+der Potenzfuntion (\texttt{pow}). 
+
+Tipp: Sie benötigen ledlich die Grundrechenarten und \emph{eine} Schleife, am besten \mintinline{c}{while}.
+
+{\em Lernziel: Bedingungen, Schleifen}
+
+
+\section{Weihnachten}
+
+Geben Sie einen „Weihnachtsbaum“ durch Ausdruck entsprechend vieler
+Leerzeichen und Sterne auf dem Bildschirm aus:
+
+\begin{minted}{text}
+      *
+     ***
+    *****
+   *******
+  *********
+ ***********
+*************
+\end{minted}
+
+Die Aufgabe ist natürlich \emph{nicht} so gedacht, einfach sieben \texttt{printf} zu benutzen, sondern soll mit Schleifen gelöst werden.
+
+Elegant ist es vor allem dann, wenn Sie die Höhe des Weihnachtsbaums variabel halten:
+
+\mintinline{c}{int hoehe = 7;}
+
+Tipp: Es gibt Lösungen mit drei, zwei oder sogar nur einer Schleife. Die einfachste Lösung benutzt drei Schleifen.
+
+\emph{Lernziel: for-Schleifen}
+
+\section{Skalarprodukt}
+
+Berechnen Sie das Skalarprodukt $\vec a \cdot \vec b$ zweier Vektoren,
+indem Sie das nachfolgende Programm erweitern. Definition des
+Skalarprodukts ist:
+%
+\[ \vec a \cdot \vec b = \sum_i a_i \cdot b_i \]
+%
+Sie multiplizeren also jeweils zwei Komponenten mit gleichem Index, und summieren diese Produkte auf.
+
+Beginnen Sie ihren Code folgendermaßen:
+\begin{minted}{c}
+#include <stdio.h>
+
+int main() {
+  double vector_a[7] = { 3, 2, 1, 5, 7, 2, -1};
+  double vector_b[7] = {-7, 3, 7, 5, 6, 8,  1};
+  /* Bitte ausfuellen */
+}
+\end{minted}
+
+Tipp: Ergebnis ist $74$ 
+
+\emph{Lernziel: for-Schleife}
+
+\section{Kleingedrucktes}
+Lesen Sie mit \mintinline{c}{scanf} einen {\em String} ein, und konvertieren Sie diesen in Kleinbuchstaben. Geben Sie den String danach mit \mintinline{c}{printf} wieder aus.
+
+\emph{Optional}: Zusatzaufgabe: Sorgen Sie dafür, dass auch die Umlaute äöü konvertiert werden.
+
+\emph{Lernziel: Strings, Schleifen}
+
+\section{Telefon-Matrix}
+Die Telefon-Matrix ist das folgende Zahlen-Raster:
+\begin{align*}
+\begin{pmatrix}
+	7 & 8 & 9 \\
+	4 & 5 & 6 \\
+	1 & 2 & 3
+\end{pmatrix}
+\end{align*}
+
+Legen Sie zwei Arrays an, die diese Daten enthalten. Eines davon soll ein zweidimensionales Array sein (es wird also über \emph{zwei} Indizes angesprochen), das andere ein eindimensionales Array sein (d.\,h. die Tabellen-Elemente werden über eine einzige, fortlaufende Nummer als Index angesprochen.).
+
+Geben Sie die beiden Matrizen auf dem Bildschirm als Tabelle aus.
+
+\emph{Lernziel: Mehrdimensionale Arrays}
+\end{document}

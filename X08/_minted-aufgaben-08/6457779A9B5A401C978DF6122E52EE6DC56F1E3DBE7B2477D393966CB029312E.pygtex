@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{void} \PYG{n}{prepend}\PYG{p}{(}\PYG{n}{listElement\PYGZus{}t} \PYG{o}{*} \PYG{n}{head}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{value}\PYG{p}{)}
+\end{Verbatim}

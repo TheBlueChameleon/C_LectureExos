@@ -1,0 +1,71 @@
+\documentclass[
+	ngerman,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage[bf]{caption} 
+	\captionsetup{format=plain}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+	
+\begin{document}
+
+\part*{C-Kurs, Blatt 08, WiSe 2019}
+
+\section*{Linked List}
+Laden Sie von GRIPS die Datei \texttt{linkedlist.c} herunter. Stellen Sie zunächst sicher, dass Sie den Code compilieren können und dass die Ausgabe so stattfindet, wie Sie das im Kurs gesehen haben. Beachten Sie, dass hier zwei Vereinfachungen vorgenommen wurden:
+\begin{itemize}
+\item Alle Routinen sind nun in einer eigenen Datei untergebracht
+\item Die Liste Arbeitet nicht mehr mit einem generischen \mintinline{v}{void *}, sondern direkt mit
+	  einem \mintinline{c}{employee_t *}
+\end{itemize}
+
+Vollziehen Sie nochmals jede Funktion einzeln nach.
+
+Erstellen Sie danach die folgenden Funktionen.
+
+\subsection*{Größten Lohn ausfindig machen}
+Schreiben Sie eine Funktion, die die Linked List durchläuft, und den Listen-Index des Elements zurück gibt, bei dem das Feld \texttt{salary} den größten Wert hat.
+
+\subsection*{Längster Name}
+Schreiben Sie eine Funktion, die die Linked List durchläuft, und die den längsten Vornamen der in der Linked List zurück gibt.
+
+\subsection*{Optional: Listenelemente Tauschen}
+Schreiben Sie eine Funktion, der Sie zwei \mintinline{c}{int}-Werte \texttt{idx1} und \texttt{idx2}übergeben. Ihre Funktion soll die Listenelemente an den Stellen \texttt{idx1} und \texttt{idx2} miteinander vertauschen.
+
+\subsection*{Optional: Liste sortieren}
+Schreiben Sie eine Funktion, die eine Linked List nach einem beliebigen (von Ihnen fest gewählten) Kriterium sortiert (z.\,B. aufsteigend nach Lohn). Sie können hierzu die Tausch-Funktion verwenden.
+
+\subsection*{Optional: Operation \enquote{for\_each}}
+Schreiben Sie eine Funktion \texttt{for\_each\_in\_linkedlist}, die eine bestimmte Operation an jedem Listenelement durchführt. Welche Operation das ist, soll über einen Funktionszeiger mitgeteilt werden. Überlegen Sie sich dazu zunächst:
+\begin{itemize}
+\item Welche Information braucht die Funktion, die die Operation an \emph{einem einzelnen Listenelement} durchführt? Wie muss also die Funktionssignatur aussehen?
+\item Wie muss dann folglich die Signatur der Funktion \texttt{for\_each\_in\_linkedlist} lauten?
+\end{itemize}
+
+Als Beispiel können Sie die Operation \texttt{capitalize} umsetzen: Diese ersetzt alle Texte (also die Felder \texttt{firstName}, \texttt{lastName} und \texttt{department} durch ihre Entsprechung in GROSSBUHSTABEN. Aus \texttt{Vanessa} soll also \texttt{VANESSA} werden.
+
+Der Aufruf\\
+\texttt{for\_each\_in\_linkedlist(list, capitalize)}
+soll dann also \emph{alle} Elemente der linked List in Großbuchstaben umsetzen.
+
+\end{document}

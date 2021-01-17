@@ -1,0 +1,149 @@
+\documentclass[
+	ngerman,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage[bf]{caption} 
+	\captionsetup{format=plain}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+	
+\begin{document}
+
+\part*{C-Kurs, Blatt 07, WiSe 2020}
+
+\section{Worte Zählen}
+Schreiben Sie ein Programm, das die Zeichen  und Worte in einer Textdatei zählt. Zum Testen können Sie die Datei \texttt{Praktische\_Physik.txt}\footnote{Quelle: \url{https://www.familie-ahlers.de/wissenschaftliche_witze/aufgaben_zur_praktischen_physik.html}} auf GRIPS benutzen.
+
+Auf Sonderfälle (z.\,B. durch Sonderzeichen im Text) müssen Sie nicht explizit eingehen.
+
+\emph{Optional}:\\
+Schreiben Sie das Programm so, dass die zu analysierende Datei als Kommandozeilenparameter übergeben werden kann.\\
+Zur Erinnerung: Sie benötigen dann die Signatur:
+\mint{c}{int main (int argc, char ** argv)}
+
+\emph{Tipp}: 
+Der Header \texttt{string.h} definiert die Funktion \texttt{strlen}.
+
+\emph{Lernziel: Dateien}
+
+\section{Karteisystem in Dateien}
+Benutzen Sie den Code von Blatt 5, Aufgabe 2 (Karteisystem), und schreiben Sie ein Programm, das die eingelesenen Informationen in eine Datei schreibt. Erstellen Sie ein zweites Programm, das diese Daten wieder zurück liest.
+
+\emph{Lernziel: Dateien}
+
+\section{Fakultät}
+Berechnen Sie die Fakultät einer Zahl n rekursiv (also durch eine Funktion, die sich selbst aurfuft) und iterativ (also über eine Schleife). Welche Methode arbeitet schneller? Warum?
+
+Zur Erinnerung:\\
+Die Fakultät einer Zahl $n$ ist definiert als:
+\begin{align*}
+	n! = \prod_{i=1}^{n}
+\end{align*}
+Beispiel:
+\begin{align*}
+	4! = 1 \cdot 2 \cdot 3  \cdot 4 = 24
+\end{align*}
+
+\emph{Lernziel: rekursive Funktionen}
+
+
+\section{Fibonacci}
+Schreiben Sie eine Funktion, die die $n$-te Fibonaccizahl rekursiv (also ohne Schleife) berechnet.
+Die Fibonaccizahlen sind definiert als:
+\begin{gather*}
+  F_n =
+    \begin{cases}
+      F_{n-1} + F_{n-2} & \text{für}\quad n > 1\\
+      1 & \text{für}\quad n=0\quad\text{oder}\quad n=1
+    \end{cases}
+\end{gather*}
+
+\emph{Lernziel: rekursive Funktionen}
+
+
+
+\section{Prozessor-Informationen}
+Unter Linux und Mac finden Sie in der Pseudo-Datei \texttt{/proc/cpuinfo} Informationen über die im System verbauten Prozessoren.
+
+Bestimmen Sie die Anzahl der Zeilen in dieser Datei, die mit \texttt{processor} beginnen.
+
+\emph{Tipp}: Sehen Sie sich die Funktion \texttt{strncmp} und \texttt{fgets} auf \url{http://en.cppreference.com/w/c} bzw. auf \url{http://de.cppreference.com/w/c} an.
+
+Wenn Sie nicht unter Linux oder Mac arbeiten, lesen Sie aus der Beispieldatei \texttt{cpuinfo.txt} in GRIPS.
+
+\emph{Lernziel: Dateien}
+
+
+\section{Echter Zufall}
+Die Pseudo-Datei \texttt{/dev/urandom} stellt unter Linux und Mac \emph{echte} Zufallswerte bereit.\footnote{Wie Sie wissen, erzeugt \texttt{rand} lediglich \emph{Pseudozufallszahlen}. Die annähernd gleichverteilten Werte entstammen einer mathematischen Sequenz, sind also mit dem ersten Wert beliebig weit vorherbestimmbar.\\
+Unixoide Systeme stellen in der genannten Datei einen Datenstrom zur Verfügung, der sich aus der Summe der gesamten Rechneraktivität bildet. Tastatureingaben, Mausbewegung, laufende Prozesse, ... gehen mit ein und sind damit eine gute Quelle für \enquote{echten Zufall}.}
+
+\texttt{/dev/urandom} ist eine Binärdatei. Um eine zufällige \mintinline{c}{int}-Zahl zu erhalten,
+lesen sie \emph{binär} aus \texttt{/dev/urandom}, und interpretieren Sie die Daten als \mintinline{c}{int}.
+
+Wenn Sie unter Windows arbeiten, lesen Sie aus der Beispieldatei \texttt{random.bin}, die auf GRIPS zur Verfügung gestellt wurde.
+
+\emph{Lernziel: Dateien}
+
+
+
+\section{Optional: Bitmaps}
+Das Dateiformat Windows Bitmap (\texttt{.bmp}) ist heute selten in Gebrauch, da sich schnell sehr große Dateien ergeben. Kompressionsverfahren wie JPEG, PNG oder GIF sind weit verbreitet und (verhältnismäßig) leicht umsetzbar. Früher war das Bitmap-Format aber durchaus verbreitet, da wenig Rechenaufwand nötig ist, um die tatsächlichen Bild-Informationen zu erfahren.
+
+Windows-Bitmap-Dateien sind folgendermaßen aufgebaut:
+
+\begin{tabular}{llp{10cm}}
+	Bytes & Datentyp                       & Funktion \\ \hline
+	2     & \mintinline{c}{char [2]}       & Signatur: Diese beiden Bytes müssen \texttt{''BM''} sein \\
+	4     & \mintinline{c}{unsigned int}   & Dateigröße in Bytes\\
+	4     & \mintinline{c}{unsigned int}   & (keine Funktion)\\
+	4     & \mintinline{c}{unsigned int}   & Offset Bilddaten (üblicherweise Wert 54)\\
+	
+	4     & \mintinline{c}{unsigned int}   & Länge des Abschnitts \emph{Metainformationen} 
+											(üblicherweise Wert 40)\\
+    4     & \mintinline{c}{int}            & Breite der Bitmap in Pixel\\
+    4     & \mintinline{c}{int}            & Höhe der Bitmap in Pixel (kann negativ sein)\\
+	2     & \mintinline{c}{unsigned short} & (keine Funktion)\\
+	2     & \mintinline{c}{unsigned short} & Farbtiefe in Bits per Pixel (bpp)\\
+	4     & \mintinline{c}{unsigned int}   & Informationen zum internen Format\\
+	4     & \mintinline{c}{unsigned int}   & Größe der \emph{Bilddaten} in Bytes\\
+    4     & \mintinline{c}{int}            & Horizontale Auflösung des Zielausgabegerätes in Pixel pro
+    											Meter; wird aber für BMP-Dateien meistens auf 0 gesetzt.\\
+    4     & \mintinline{c}{int}            & Vertikale Auflösung des Zielausgabegerätes in Pixel pro
+    											Meter; wird aber für BMP-Dateien meistens auf 0 gesetzt.\\
+	2     & \mintinline{c}{unsigned int}   & Bei manchen Bitmaps: Für das Bild definierte Farben;
+											üblicherweise aber 0\\
+	2     & \mintinline{c}{unsigned int}   & ei manchen Bitmaps: Im Bild tatsächlich benutzte Farben;
+											üblicherweise aber 0\\
+\end{tabular}
+
+Lesen Sie diesen \enquote{Bitmap-Header} aus der Datei \texttt{bitmap.bmp} von GRIPS ein, und geben Sie die Informationen auf dem Bildschirm aus.
+
+\emph{Tipp: Definieren Sie ein \mintinline{c}{struct}, und verwenden Sie nur einen einzigen Lese-Befehl!}
+
+Wenn Sie \enquote{unsinnige} Werte lesen, kann es sein, dass die \mintinline{c}{struct} auf ganzzahlige Vielfache von 4 verbreitert wird. Dies erlaubt effizientere Lese-Zugriffe, passt aber natürlich nicht auf die Struktur einer Bitmap. Sie können dies umgehen, indem Sie ihr Programm mit der Zeile
+\mint{c}{#pragma pack (1)}
+beginnen.
+
+Siehe auch \url{https://de.wikipedia.org/wiki/Windows_Bitmap} für detailliertere Informationen
+\end{document}

@@ -1,0 +1,15 @@
+# patterns to exclude
+*.aux
+*.log
+*.lof
+*.lot
+*.out
+*.pdf
+*.synctex.gz
+*.toc
+
+# files to ignore
+.directory
+
+# directories to exclude
+# e.g. "Source Material/"

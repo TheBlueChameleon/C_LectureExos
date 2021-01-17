@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{typedef} \PYG{k}{struct} \PYG{n}{listElement\PYGZus{}struct} \PYG{p}{\PYGZob{}}
+  \PYG{k+kt}{int} \PYG{n}{data}\PYG{p}{;}
+  \PYG{k}{struct} \PYG{n}{listElement\PYGZus{}struct} \PYG{o}{*} \PYG{n}{next}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}} \PYG{n}{listElement\PYGZus{}t}\PYG{p}{;}
+\end{Verbatim}

@@ -1,0 +1,106 @@
+\documentclass[
+	ngerman,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8x]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage[bf]{caption} 
+	\captionsetup{format=plain}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+
+\newcommand*{\inC}[1]{\mintinline{c}{#1}}
+
+\begin{document}
+
+\part*{C-Kurs, Blatt 08, WiSe 2020}
+
+Wir bauen in dieser Aufgabe nochmal Schritt für Schritt eine Linked List auf. Unsere Liste soll \inC{int}-Werte verwalten
+
+\section{Datentyp und Listenanfang}
+Sehen Sie sich auf Seite 206 des Scripts die \emph{Visualisierung: Verkettete} Liste an, und vergleichen Sie mit dem dort gezeigten Code-Abschnitt:
+\begin{minted}{c}
+typedef struct listElement_struct {
+  int data;
+  struct listElement_struct * next;
+} listElement_t;
+\end{minted}
+
+Machen Sie sich klar:
+\begin{itemize}
+\item Eine \emph{Instanz} von \texttt{listElement\_t} entspricht in diesem Bild \emph{zwei Zellen}.
+\item \emph{Jede Instanz} hat ihre eigenen beiden Attribute (Records). Jedes solche Attribut entspricht in diesem Bild einer Zelle.
+\item Wir können in einer Variablen die Daten zu \emph{einer Instanz} speichern. Alle weiteren Instanzen liegen \enquote{irgendwo} im Speicher.
+\item Wir können uns aber zu einem beliebigen Element der Liste \enquote{durchhangeln}.
+\item Haben wir Beispielsweise die Instanz \texttt{list}, so ist das Nachfolgende Element durch \texttt{*list.next} erreichbar, und der \inC{int}-Wert dieses
+	Nachfolgers mit \texttt{(*list.next).data} zugänglich. Zerlegen Sie im Kopf diese Syntax in Ihre Bestandteile, und machen Sie sich klar, welche Zelle(n) im Schaubild
+	erreicht werden und warum.
+\end{itemize}
+
+Schreiben Sie nun eine Funktion \texttt{newElement(int value)}, die \emph{einen Pointer} auf eine neue Listen-Instanz zurück gibt. Ihre Funktion soll so genutzt werden können:
+
+\begin{minted}{c}
+int main () {
+  listElement_t * firstElement;
+  firstElement = newElement(5);   // legt eine Liste mit einem Element an.
+                                  // Der Wert dieses Elements ist 5.
+}
+\end{minted}
+
+Welchen Rückgabetyp muss also Ihre Funktion haben? Welcher Wert muss für das Attribut \texttt{next} eingetragen werden? Ihre Funktion wird mit dynamischer Speicherverwaltung zuerst Speicherplatz bereit stellen müssen. Denken Sie daran, dass Sie bei der Arbeit mit Pointern und \inC{struct}s die Pfeil-Syntax (\texttt{->}) brauchen werden.
+
+\section{Methode prepend}
+Wir wollen nun Elemente an den \emph{Listenanfang} anhängen (also vor das Element mit Wert \inC{5}, das wir schon angelegt haben). Schreiben Sie dazu eine Funktion \inC{void prepend(listElement_t * head, int value)}. Diese soll nach dem folgenden Prinzip funktionieren:
+
+\begin{itemize}
+\item Ein neues Element wird mit \texttt{newElement} angelegt.
+\item Dieses neue Element soll eine Kopie des ersten Elements sein.
+\item Das erste Element der Liste (\texttt{head}) zeigt auf das neu angelegte Element
+\item Die \enquote{Nutzdaten} (\texttt{data}) des ersten Elements der Liste (\texttt{head}) erhalten den neuen Wert (\texttt{value})
+\end{itemize}
+
+Machen Sie sich auch klar: Auf diese Art ändert sich die Adresse \texttt{firstElement} nicht, die wir in der \texttt{main} verwalten müssen.
+
+\section{Liste Ausgeben}
+Wir wollen nun sehen, ob auch wirklich alle Elemente so im Speicher abgelegt wurden, wie Sie dies wollten. Schreiben Sie dazu eine Funktion \inC{showList(listElement_t * head)}. Die Funktion soll die Attribute \texttt{data} jeder Instanz der Linked List auf dem Bildschrim ausgeben. Welchen Rückgabetyp sollte diese Funktion also haben? Woher wissen wir, ob die Liste schon fertig bearbeitet wurde?
+
+\section{Methode pop}
+Schreiben Sie eine Funktion \inC{pop(listElement_t ** head)}, die das erste Element einer Liste löscht. Der Rückgabewert soll der Wert des Attributs \texttt{data} des soeben gelöschten Listenelements sein. Denken Sie auch daran, reservierten Speicher mit \texttt{free} freizugeben.
+
+Warum brauchen wir hier einen \texttt{listElement\_t **} statt einem \texttt{listElement\_t *}? (Denken Sie an Ihre Variable \texttt{firstElement} in der \texttt{main}). Welchen Datentyp muss der Rückgabewert haben?
+
+\emph{Hintergrund-Information:} Wenn Sie diese Aufgabe gelöst haben, haben sie eine sogenannte \emph{LIFO-Datenstruktur} implementiert (Last In, First Out; manchmal auch Stack genannt). Wie auf einem Stapel können Sie nun Informations-Einheiten \enquote{übereinander legen} und dann von oben weg wieder abarbeiten. Wo in der Informatik Daten in umgekehrter Reihenfolge des Ansammelns abgearbeitet werden sollen, wird eine solche Stack-Struktur tatsächlich genutzt.
+
+\section{Liste Löschen}
+Wie Sie wissen, sollte zu jedem \texttt{malloc} bzw. \texttt{calloc} auch ein \texttt{free} geschrieben werden. Schreiben Sie eine Funktion \inC{clearList(listElement_t * head)}, die den Speicher für \emph{jede Instanz} wieder freigibt. Sie können dazu Ihre Funktion \texttt{pop} benutzen. Erkennen Sie die Ähnlichkeit zur Aufgabe \emph{Liste Ausgeben}?
+
+\section{Optional: Länge der Liste Bestimmen}
+Erstellen Sie eine Funktion, die ausgibt, wie viele Elemente die Linked List hat.
+
+\section{Optional: Append}
+Schreiben Sie eine Funktion, die ein Element \emph{an das Ende der Liste} anhängt. Erkennen Sie die Ähnlichkeit zur vorigen Aufgabe?
+
+\section{Optional: Element Einfügen}
+Schreiben Sie nun eine Funktion, die ein Element \emph{an beliebiger Stelle} in die Liste einfügt. Der Aufruf \texttt{insert(firstElement, 3, 99)} sollte also an Listenplatz 3 ein Element einfügen, und alle anderen Elemente einen Platz nach hinten schieben. (Wie üblich beginnen wir die Zählung bei 0).
+
+Wenn Sie sich geschickt anstellen, können Sie die Funktionen \texttt{append} und \texttt{prepend} benutzen, um diese beiden Spezialfälle zu bearbeiten. Achten Sie auch darauf, dass der User unsinnige Werte eingeben könnte, und fangen Sie diese ab. (Unsinnig wäre z.\;B. der Befehl, ein Element an Stelle \texttt{-1} einzufügen).
+
+\end{document}

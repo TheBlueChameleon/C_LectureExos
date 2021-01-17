@@ -1,0 +1,174 @@
+\documentclass[
+	ngerman,
+	fontsize=10pt,
+	parskip=half,
+	titlepage=true,
+	DIV=12
+]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage[T1]	{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+\usepackage{minted}
+	\usemintedstyle{xcode}
+
+\begin{document}
+
+\part*{C-Kurs, Blatt 03, WiSe 2020}
+
+\section{Bubblesort}
+Sortieren Sie ein mit Zufallszahlen belegtes Array beliebiger Größe mit dem
+Bubble-Sort-Verfahren:
+Jeweils zwei benachbarte Feldelemente werden vertauscht, wenn sie in der falschen Reihenfolge sind.
+
+Zur Erinnerung: Zufallszahlen z.B. zwischen $0$ und $99$ erhalten Sie,
+wenn Sie
+\mint{c}{#include <stdlib.h>}
+einbinden, und dann diesen Ausdruck anwenden:
+\mint{c}{rand() % 100}
+
+Um nicht bei jedem Programmstart dieselbe \enquote{Zufallsreihe} zu erhalten brauchen Sie auch die Zeilen
+\mint{c}{#include <time.h>}
+und
+\mint{c}{srand(time(NULL));}
+
+\emph{Lernziel: Schleifen, Arrays, break}
+
+
+\section{Oktaederstumpf}
+Schreiben Sie je eine Funktion, die das Volumen und die Fläche eines Oktaederstumpfes berechnet.
+Formeln dazu: \url{http://de.wikipedia.org/wiki/Oktaederstumpf}
+
+Optional können Sie auch eine einzige Funktion schreiben, die beides -- Volumen und Fläche -- zugleich berechnet (\emph{Tipp Hierzu: Pointer}).
+
+Hinweis: Die Funktionen selbst sollen \emph{kein} \texttt{printf} enthalten.
+
+\emph{Lernziel: Funktionen}
+
+
+\section{Quersumme}
+Erstellen Sie eine Funktion, die die Quersumme einer Ganzzahl berechnet und an die \texttt{main} zurück gibt. Auch hier soll Ihre Funktion selbst wieder \emph{kein} \texttt{printf} enthalten.
+
+\emph{Lernziel: Funktionen, Schleifen}
+
+
+\section{Tauschen}
+Schreiben Sie eine Funktion, die den Wert zweier Variablen vertauscht.
+Bauen Sie auf folgendem Code auf:
+
+\begin{minted}{c}
+double a = 1.3;
+double b = 7.7;
+
+printf("a = %f\tb = %f\n", a, b);
+swap( /* was muss hier hin ? */  );
+printf("a = %f\tb = %f\n", a, b);
+\end{minted}
+
+und schreiben Sie eine Funktion \texttt{swap}, so dass die Ausgabe des obigen Code-Fragments lautet:
+
+\begin{minted}{text}
+a = 1.300000	b = 7.700000
+a = 7.700000	b = 1.300000
+\end{minted}
+
+Tipp: Sie werden nicht ohne Zeiger auskommen.
+
+\emph{Lernziel: Funktionen und Pointer.}
+
+
+\section{Optional: Bubblesort als Funktion}
+Benutzen Sie Ihren Code aus Aufgabe 1, um das Sortieren von einer Funktion \texttt{bsort} erledigen zu lassen. Warum müssen dieser Funktion \emph{zwei} Parameter übergeben werden?
+
+
+\section{Optional: Kartenspiel}
+Hier wollen wir das Wechselspiel von Funktionen betrachten, um eine komplexere Aufgabe zu lösen. In diesem Fall werden wir:
+\begin{itemize}
+\item uns eine Datenstruktur überlegen, mit der wir ein Kartenspiel im Speicher abbilden
+\item eine Routine schreiben, die eine Karte auf dem Bildschirm ausgibt
+\item eine Routine schreiben, die die höherwertige zweier Karten ermittelt
+\item optional: ein Mini-Spiel daraus erstellen, das wir gegen den Computer spielen können.
+\end{itemize}
+
+In diesem Spiel soll ein Kartenstapel mit französischem Blatt (vier Farben: Herz, Karo, Pik, Kreuz; dreizehn Kartenwerte, von Ass bis König) simuliert werden. Keine Karte kommt im Deck doppelt vor. Der Benutzer zieht die oberste Karte vom Stapel, und soll raten, ob der Computer als nächstes eine höherwertige oder niedrigere Karte zieht. Herz gilt als Trumpffarbe. Gehen Sie dabei nach folgenden Schritten vor:
+
+\subsection{Datenstruktur und Ausgabe}
+Eine Spielkarte ist durch zwei Informationen definiert: Kartenwert und Farbe. Wir könnten zwar diese beiden Informationen separat speichern, müssten dann aber auch mit wenigstens zwei Variablen umgehen. Stattdessen ist es leichter, jeder Karte eine Nummer zu geben, und bei Bedarf aus dieser Nummer Kartenwert und -Farbe zu \enquote{errechnen}. Sie können sich an folgende Tabelle halten:
+
+\begin{center}
+\begin{tabular}{ll|ll|ll|ll}
+	\textbf{Nummer} & \textbf{Karte} &
+	\textbf{Nummer} & \textbf{Karte} &
+	\textbf{Nummer} & \textbf{Karte} &
+	\textbf{Nummer} & \textbf{Karte} \\\hline
+	
+	 0 & Herz  Ass &
+	13 & Karo  Ass &
+	26 & Pik   Ass &
+	39 & Kreuz Ass \\
+	
+	 1 & Herz  2 &
+	14 & Karo  2 &
+	27 & Pik   2 &
+	40 & Kreuz 2 \\
+	
+	 2 & Herz  3 &
+	15 & Karo  3 &
+	28 & Pik   3 &
+	41 & Kreuz 3 \\
+	
+	\ldots \\
+	
+	 9 & Herz  10 &
+	22 & Karo  10 &
+	35 & Pik   10 &
+	48 & Kreuz 10 \\
+	
+	10 & Herz  Bube &
+	23 & Karo  Bube &
+	36 & Pik   Bube &
+	49 & Kreuz Bube \\
+	
+	11 & Herz  Dame &
+	24 & Karo  Dame &
+	37 & Pik   Dame &
+	50 & Kreuz Dame \\
+	
+	12 & Herz  König &
+	25 & Karo  König &
+	38 & Pik   König &
+	51 & Kreuz König \\
+\end{tabular}
+\end{center}
+
+Schreiben Sie nach dieser Tabelle zwei Funktionen, die jeweils die Kartennummer als Parameter annehmen. Eine davon soll den Kartenwert als \mintinline{c}{int} zurückgeben, die andere die Karten-Farbe \mintinline{c}{char} (also z.\,B. \texttt{'H'} für Herz).
+
+\emph{Tipp: Verwenden Sie den Modulo-Operator \texttt{\%} und die Division, um Kartenfarbe und -Wert zu ermitteln!}
+
+Da Sie nun nur noch eine Information verwalten müssen -- eben die Kartennummer -- können Sie den Stapel als \mintinline{c}{int}-Array abbilden.
+\begin{itemize}
+\item Legen Sie in ihrer \mintinline{c}{int main ()} ein \mintinline{c}{int}-Array \texttt{cards} an,
+	und befüllen Sie dieses aufsteigend mit den Zahlen von \texttt{0} bis \texttt{51}
+\item Schreiben Sie eine Funktion, die diesen Kartenstapel mischt. Der Funktion soll als Parameter
+	lediglich die Variable \texttt{cards} übergeben werden.\\
+	\emph{Tipp: Sie können hierzu die Funktion \texttt{swap} von weiter oben benutzen!}
+\item Überprüfen Sie jetzt ihre Arbeit, indem Sie eine Funktion \texttt{show} schreiben, der eine
+	Kartennummer übergeben wird, und die auf dem Bildschrim Kartenwert und -Farbe ausgibt. Rufen Sie
+	dazu von ihrer Funktion \texttt{show} die anderen Funktionen auf, die Kartenwert und Farbe
+	berechnen.	
+\end{itemize}
+
+\subsection{Karten Vergleichen}
+Benutzen Sie nun den gegebenen Aufbau, um eine Funktion zu schreiben, der \emph{zwei} Kartennummern übergeben werden. Die Funktion soll \texttt{+1} zurück geben, wenn die erste Kartennummer die höherwertige Karte beschreibt, und \texttt{-1}, wenn die zweite Kartennummer die höherwertige Karte beschreibt.
+
+\subsection{Spiel}
+Benutzen Sie den bestehenden Aufbau, um ein Spiel gegen den Computer zu bauen.
+
+\end{document}

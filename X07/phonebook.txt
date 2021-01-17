@@ -1,0 +1,3 @@
+Hans Wurst, 99 1.230000
+Mario Anner, -1 4.200000
+Rosa Schlüpfer, 11 9.870000
