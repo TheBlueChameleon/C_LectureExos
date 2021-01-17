@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{n}{srand}\PYG{p}{(}\PYG{n}{time}\PYG{p}{(}\PYG{n+nb}{NULL}\PYG{p}{));}
-\end{Verbatim}

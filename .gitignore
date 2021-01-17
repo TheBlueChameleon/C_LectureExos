@@ -7,9 +7,11 @@
 *.pdf
 *.synctex.gz
 *.toc
+*.pygtex
 
 # files to ignore
 .directory
 
 # directories to exclude
 # e.g. "Source Material/"
+*/_minted_aufgaben*/
