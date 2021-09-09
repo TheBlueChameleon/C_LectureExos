@@ -30,12 +30,17 @@
 \usepackage{tikz}
 	\usetikzlibrary{calc}
 	\usetikzlibrary{positioning}
-	
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\newcommand*{\setNaturals}{\ensuremath{\mathds{N}}}
+
 \begin{document}
 
 \part*{C-Kurs, Blatt 04, WiSe 2020}
 
-\section{Primzahlsieb}
+\section{Primzahlsieb (3P)}
 Schreiben Sie ein Programm, das alle Primzahlen zwischen $2$ und einer anderen Zahl $N$ berechnet.
 
 Ein Schnelles Verfahren dafür ist das \emph{Sieb des Eratosthenes}\footnote
@@ -52,32 +57,109 @@ Ob eine Zahl prim oder nicht ist, ist eine ja/nein-Frage, braucht also nur ein e
 \emph{Diese optionale Zusatz-Aufgabe erweitert die geübten Techniken um bitweise Logik.}
 
 
-\section{Primfaktorzerlegung}
+\section{Primfaktorzerlegung (2P)}
 Schreiben Sie eine Funktion, der eine natürliche Zahl übergeben wird, und die ein dynamisches Array ihrer Primfaktoren zurück gibt. Vergessen Sie nicht, dieses Array wieder freizugeben!
 
 \emph{Tipp: Sie können diese Aufgabe lösen, ohne explizit Primzahlen zu ermitteln.}
 
 \emph{Lernziel: dynamische Arrays (realloc), Schleifen, if-else, Funktionen}
 
-\section{Binärdarstellung}
+\section{Binärdarstellung (1P)}
 Lesen Sie eine Ganzzahl ein und geben Sie deren Bitmuster aus (z.B.: 23 $\rightarrow$ 00010111).
 
 \emph{Lernziel: Bitweise Logik}
 
-\section{Selection Sort}
+\section{Selection Sort (2P)}
 Schreiben Sie ein Sortierprogramm, das nach dem Selection-Sort Algorithmus arbeitet: 
 \begin{enumerate}
 \item Suche das kleinste (oder größte) Element des Arrays
 \item Vertausche dieses mit dem ersten Element des Arrays
-\item Gehe wieder zu Schritt 1, jetzt aber mit dem verkürzten Array
+\item Gehe wieder zu Schritt 1, betrachte jetzt aber das Sub-Array ohne das erste (bereits richtig platzierte) Element
 \end{enumerate}
 Wieso ist dieses Verfahren effizienter als Bubble-Sort?
 
 \emph{Lernziel: Schleifen}
 
-\section{Palindrome}
+\section{Palindrome (1P)}
 Schreiben Sie eine Funktion \mintinline{c}{int palin(char *c)}, die prüfen soll, ob ein gegebenes Wort oder ein Satz ein Palindrom ist. 
 
 (\emph{Ein Palindrom ist eine Zeichenkette, die \enquote{von hinten} und \enquote{von vorne} gelesen gleich aussieht. Beispiele:} Otto; Able was I ere I saw Elba)
+
+\section{Optional: Collatz-Vermutung (4P)}
+\subsection{Mathematische Definition}
+Die Collatz-Vermutung\footnote{Siehe Link: \url{https://de.wikipedia.org/wiki/Collatz-Problem}} ist ein bislang ungelöstes Problem aus dem Jahr 1937. Die unbewiesene Aussage lautet:
+
+Gegeben sei eine Abbildung $a: \setNaturals \to \setNaturals$ mit:
+\begin{equation*}
+	a(n) = \begin{cases}
+		3n + 1 & \text{wenn } n \text{ ungerade} \\
+		\frac{n}{2} & \text{sonst}
+	\end{cases}
+\end{equation*}
+
+Dann definiert diese Abbildung $a$ eine Folge $(c_n^{(k)})_{n=1, 2, \ldots}$:
+\begin{align*}
+	c_1^{(k)} &= k \\
+	c_{n + 1} &= a( c_n^{(k)} )
+\end{align*}
+
+Für jede \emph{positive ganze Zahl} $n$ endet diese Folge (angeblich) mit dem Wert $1$ (bzw. in dem Zyklus $1 \to 4 \to 2 \to 1 \to ...$).\\
+(Durch brute-force-Berechnung wurde dies bis zum Wert $k=2^{68}$ bestätigt. Im Allgemeinen ist die Aussage weder bewiesen noch widerlegt.)
+
+\subsection{Aufgabe}
+Schreiben Sie ein Programm, das für einen beliebigen Startwert $k$ die zugehörige Folge $(c_n^{(k)})_{n \in \setNaturals}$ bis zum ersten Auftauchen des Wertes $1$ berechnet und in einem dynamischen Array speichert. Geben Sie anschließend die gespeicherten Werte auf dem Bildschirm aus.
+
+\subsection{Tipps}
+\subsubsection{Arrays variabler Länge}
+Sie wollen eine Liste von Ganzzahlen speichern, deren Länge Sie zu Beginn noch nicht kennen. Anstatt eine Variable für die gegenwärtige Länge der Liste und einen Pointer auf die Daten selbst zu verwalten, können Sie auch festlegen, dass das erste Element Ihres Arrays die gegenwärtige Länge enthält, also:
+
+\texttt{data[0] = Anzahl\_Elemente}\\
+\texttt{data[1] = Eintrag\_1} \\
+...\\
+\texttt{data[ data[0] ] = letzter\_Eintrag}
+
+Achtung: Wenn Ihre Liste $N$ einträge hat: wie viele Elemente muss dann Ihr Array fassen? Was ist der größte erlaubte Index?
+
+\subsubsection{Anhängen-Methode}
+Eine Zahl an ein solches Array anzuhängen braucht einige Befehle. Da Sie immer wieder Zahlen an eine Liste anhängen wollen, sollten Sie diese Unteraufgabe in einer Funktion verpacken. Schreiben Sie also eine Funktion \texttt{appendInt}:
+
+\texttt{data = appendInt(data, n);}
+
+dieser Befehl soll den Effekt haben, dass der Wert \texttt{n} am Ende der Liste eingetragen wird und ihre Länge im Speicher entsprechend angepasst wird.
+
+\subsubsection{Testen durch Drucken}
+Schreiben Sie nun eine Funktion \texttt{printInts}, die alle Zahlen des Arrays (ohne die Längenangabe) auf dem Bildschirm ausgibt, und testen Sie so, ob Ihre Funktion \texttt{appendInt} richtig funktioniert.
+
+\subsubsection{Core-Code}
+Mit den oben erstellten Hilfsmitteln sollte es jetzt für Sie ein Leichtes sein, eine Funktion zu schreiben, die so funktioniert:
+
+\texttt{data = getCollatzSequence(k);}
+
+\subsubsection{Speicher Freigeben und Abfangen fehlerhafter Eingaben}
+Haben Sie daran gedacht, allen verwendeten Speicher wieder freizugeben? Was tut Ihr Programm, falls der User unsinnige Werte eingibt? Was geschieht, wenn Speicherprobleme auftreten? Machen Sie Ihr Programm möglichst bedien-sicher. Sorgen Sie im Zweifel dafür, dass das gesamte Programm beendet wird, falls ein Fehler auftritt. Hierzu dient der Befehl \texttt{exit(-1);}.
+
+\subsection{Beispiel}
+\begin{minted}{text}
+The Collatz sequence for 1:
+  1
+The Collatz sequence for 2:
+  2, 1
+The Collatz sequence for 3:
+  3, 10, 5, 16, 8, 4, 2, 1
+The Collatz sequence for 4:
+  4, 2, 1
+The Collatz sequence for 5:
+  5, 16, 8, 4, 2, 1
+The Collatz sequence for 6:
+  6, 3, 10, 5, 16, 8, 4, 2, 1
+The Collatz sequence for 7:
+  7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1
+The Collatz sequence for 8:
+  8, 4, 2, 1
+The Collatz sequence for 9:
+  9, 28, 14, 7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1
+The Collatz sequence for 10:
+  10, 5, 16, 8, 4, 2, 1
+\end{minted}
 \end{document}
 

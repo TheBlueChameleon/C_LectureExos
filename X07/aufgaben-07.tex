@@ -31,7 +31,7 @@
 
 \part*{C-Kurs, Blatt 07, WiSe 2020}
 
-\section{Worte Zählen}
+\section{Worte Zählen (1P)}
 Schreiben Sie ein Programm, das die Zeichen  und Worte in einer Textdatei zählt. Zum Testen können Sie die Datei \texttt{Praktische\_Physik.txt}\footnote{Quelle: \url{https://www.familie-ahlers.de/wissenschaftliche_witze/aufgaben_zur_praktischen_physik.html}} auf GRIPS benutzen.
 
 Auf Sonderfälle (z.\,B. durch Sonderzeichen im Text) müssen Sie nicht explizit eingehen.
@@ -46,12 +46,12 @@ Der Header \texttt{string.h} definiert die Funktion \texttt{strlen}.
 
 \emph{Lernziel: Dateien}
 
-\section{Karteisystem in Dateien}
+\section{Karteisystem in Dateien (1P)}
 Benutzen Sie den Code von Blatt 5, Aufgabe 2 (Karteisystem), und schreiben Sie ein Programm, das die eingelesenen Informationen in eine Datei schreibt. Erstellen Sie ein zweites Programm, das diese Daten wieder zurück liest.
 
 \emph{Lernziel: Dateien}
 
-\section{Fakultät}
+\section{Fakultät (1P)}
 Berechnen Sie die Fakultät einer Zahl n rekursiv (also durch eine Funktion, die sich selbst aurfuft) und iterativ (also über eine Schleife). Welche Methode arbeitet schneller? Warum?
 
 Zur Erinnerung:\\
@@ -67,7 +67,7 @@ Beispiel:
 \emph{Lernziel: rekursive Funktionen}
 
 
-\section{Fibonacci}
+\section{Fibonacci (1P)}
 Schreiben Sie eine Funktion, die die $n$-te Fibonaccizahl rekursiv (also ohne Schleife) berechnet.
 Die Fibonaccizahlen sind definiert als:
 \begin{gather*}
@@ -82,7 +82,7 @@ Die Fibonaccizahlen sind definiert als:
 
 
 
-\section{Prozessor-Informationen}
+\section{Prozessor-Informationen (1P)}
 Unter Linux und Mac finden Sie in der Pseudo-Datei \texttt{/proc/cpuinfo} Informationen über die im System verbauten Prozessoren.
 
 Bestimmen Sie die Anzahl der Zeilen in dieser Datei, die mit \texttt{processor} beginnen.
@@ -94,7 +94,7 @@ Wenn Sie nicht unter Linux oder Mac arbeiten, lesen Sie aus der Beispieldatei \t
 \emph{Lernziel: Dateien}
 
 
-\section{Echter Zufall}
+\section{Echter Zufall (1P)}
 Die Pseudo-Datei \texttt{/dev/urandom} stellt unter Linux und Mac \emph{echte} Zufallswerte bereit.\footnote{Wie Sie wissen, erzeugt \texttt{rand} lediglich \emph{Pseudozufallszahlen}. Die annähernd gleichverteilten Werte entstammen einer mathematischen Sequenz, sind also mit dem ersten Wert beliebig weit vorherbestimmbar.\\
 Unixoide Systeme stellen in der genannten Datei einen Datenstrom zur Verfügung, der sich aus der Summe der gesamten Rechneraktivität bildet. Tastatureingaben, Mausbewegung, laufende Prozesse, ... gehen mit ein und sind damit eine gute Quelle für \enquote{echten Zufall}.}
 
@@ -107,10 +107,10 @@ Wenn Sie unter Windows arbeiten, lesen Sie aus der Beispieldatei \texttt{random.
 
 
 
-\section{Optional: Bitmaps}
+\section{Optional: Bitmaps (3P)}
 Das Dateiformat Windows Bitmap (\texttt{.bmp}) ist heute selten in Gebrauch, da sich schnell sehr große Dateien ergeben. Kompressionsverfahren wie JPEG, PNG oder GIF sind weit verbreitet und (verhältnismäßig) leicht umsetzbar. Früher war das Bitmap-Format aber durchaus verbreitet, da wenig Rechenaufwand nötig ist, um die tatsächlichen Bild-Informationen zu erfahren.
 
-Windows-Bitmap-Dateien sind folgendermaßen aufgebaut:
+Windows-Bitmap-Dateien bestehen aus einem Header (Meta-Informationen über das Bild) und dem Bulk, in dem einfach die Pixel-Farben als Zahlen hintereinander stehen. Der Header ist folgendermaßen aufgebaut:
 
 \begin{tabular}{llp{10cm}}
 	Bytes & Datentyp                       & Funktion \\ \hline
@@ -133,7 +133,7 @@ Windows-Bitmap-Dateien sind folgendermaßen aufgebaut:
     											Meter; wird aber für BMP-Dateien meistens auf 0 gesetzt.\\
 	2     & \mintinline{c}{unsigned int}   & Bei manchen Bitmaps: Für das Bild definierte Farben;
 											üblicherweise aber 0\\
-	2     & \mintinline{c}{unsigned int}   & ei manchen Bitmaps: Im Bild tatsächlich benutzte Farben;
+	2     & \mintinline{c}{unsigned int}   & Bei manchen Bitmaps: Im Bild tatsächlich benutzte Farben;
 											üblicherweise aber 0\\
 \end{tabular}
 

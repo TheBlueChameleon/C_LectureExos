@@ -22,18 +22,19 @@
 
 \part*{C-Kurs, Blatt 02, WiSe 2020}
 
-
-\section{Taschenrechner}
-
+\section{Taschenrechner (1P)}
 Programmieren Sie mithilfe der \mintinline{c}{switch} Anweisung einen Mini-Taschenrechner,
 der zwei Zahlen und einen Operator (\texttt{+}, \texttt{-}, \texttt{*}, \texttt{/})
 einliest und das Ergebnis ausgibt.
 Eine eventuelle Division durch 0 soll abgefangen werden.
 
+\emph{Tipp:}\\
+Zum Testen kostet es viel Zeit, immer wieder dieselben Werte für \texttt{a, b, c} einzugeben. Kommentieren Sie stattdessen die \texttt{scanf}-Abfrage zuerst aus, und arbeiten Sie mit festen Werten. Wenn Sie denken, Ihr Programm funktioniert, können Sie die Interaktivität wieder \enquote{dazuschalten}.
+
 \emph{Lernziel: switch-case}
 
-\section{Verzinsung}
 
+\section{Verzinsung (1P)}
 Schreiben Sie ein Programm, das zu einem gegebenen Anfangskapital
 bei einem vorgegebenem jährlichen Zinssatz berechnet,
 wie viele Jahre benötigt werden, damit das Kapital eine 
@@ -47,13 +48,13 @@ Lösen Sie diese Aufgabe \emph{ohne} die Verwendung
 des Logarithmus (\texttt{log}) und \emph{ohne} die Verwendung
 der Potenzfuntion (\texttt{pow}). 
 
-Tipp: Sie benötigen ledlich die Grundrechenarten und \emph{eine} Schleife, am besten \mintinline{c}{while}.
+\emph{Tipp:}\\
+Sie benötigen ledlich die Grundrechenarten und \emph{eine} Schleife, am besten \mintinline{c}{while}.
 
-{\em Lernziel: Bedingungen, Schleifen}
+\emph{Lernziel: Bedingungen, Schleifen}
 
 
-\section{Weihnachten}
-
+\section{Weihnachten (2P)}
 Geben Sie einen „Weihnachtsbaum“ durch Ausdruck entsprechend vieler
 Leerzeichen und Sterne auf dem Bildschirm aus:
 
@@ -73,15 +74,17 @@ Elegant ist es vor allem dann, wenn Sie die Höhe des Weihnachtsbaums variabel h
 
 \mintinline{c}{int hoehe = 7;}
 
-Tipp: Es gibt Lösungen mit drei, zwei oder sogar nur einer Schleife. Die einfachste Lösung benutzt drei Schleifen.
+\emph{Tipp:}\\
+Es gibt Lösungen mit drei, zwei oder sogar nur einer Schleife. Die einfachste Lösung benutzt drei Schleifen.
 
 \emph{Lernziel: for-Schleifen}
 
-\section{Skalarprodukt}
 
-Berechnen Sie das Skalarprodukt $\vec a \cdot \vec b$ zweier Vektoren,
-indem Sie das nachfolgende Programm erweitern. Definition des
-Skalarprodukts ist:
+\section{Skalarprodukt (1P)}
+Berechnen Sie das Skalarprodukt $\vec a \cdot \vec b$ zweier Vektoren, indem Sie das nachfolgende Programm erweitern.
+
+Zur Erinnerung:\\
+Die Definition des Skalarprodukts ist:
 %
 \[ \vec a \cdot \vec b = \sum_i a_i \cdot b_i \]
 %
@@ -98,18 +101,21 @@ int main() {
 }
 \end{minted}
 
-Tipp: Ergebnis ist $74$ 
+\emph{Tipp:}\\
+Das Ergebnis ist $74$.
 
 \emph{Lernziel: for-Schleife}
 
-\section{Kleingedrucktes}
+
+\section{Kleingedrucktes (1P)}
 Lesen Sie mit \mintinline{c}{scanf} einen {\em String} ein, und konvertieren Sie diesen in Kleinbuchstaben. Geben Sie den String danach mit \mintinline{c}{printf} wieder aus.
 
-\emph{Optional}: Zusatzaufgabe: Sorgen Sie dafür, dass auch die Umlaute äöü konvertiert werden.
+\emph{Optional (+1P)}:\\
+Sorgen Sie dafür, dass auch die Umlaute äöü konvertiert werden.
 
 \emph{Lernziel: Strings, Schleifen}
 
-\section{Telefon-Matrix}
+\section{Telefon-Matrix (1P)}
 Die Telefon-Matrix ist das folgende Zahlen-Raster:
 \begin{align*}
 \begin{pmatrix}

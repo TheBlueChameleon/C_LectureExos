@@ -25,7 +25,7 @@
 
 \part*{C-Kurs, Blatt 01, WiSe 2020}
 
-\section{Arbeitsumgebung Testen}
+\section{Arbeitsumgebung Testen (1P)}
 Falls nicht schon geschehen: Stellen Sie sicher, dass Ihr Computer zum Programmieren in C korrekt eingerichtet ist. Ein Tutorial hierzu ist auf der Kursbeschreibung-Seite der Fakultät Physik verlinkt \url{https://www.ur.de/physik/fakultaet/studium/it-ausbildung/c-und-c/index.html}:
 \begin{itemize}
 \item Falls Sie Windows benutzen, ist eine ausführliche Beschreibung zu finden unter: \\
@@ -48,20 +48,20 @@ oder
 
 Führen Sie das Programm aus.
 
-Falls Sie hierbei Probleme haben, wenden Sie sich an die TutorInnen.
+Falls Sie hierbei Probleme haben, wenden Sie sich an die Tutor*innen.
 %\clearpage
 
 
 
-\section{Hallo!}
+\section{Hallo! (1P)}
 Schreiben Sie ein Programm, das den Benutzer begrüßt. Benutzen Sie also \inC{printf}, um eine Nachricht auszugeben.
 
 
-\section{Operatoren}
+\section{Operatoren (1P)}
 Belegen Sie zwei \inC{int}-Variablen mit den Werten 7 und 5 und geben Sie deren Summe, Produkt, Differenz und Quotienten aus. Was müssen Sie tun, damit bei der Division das Ergebnis \texttt{1.400000} angezeigt wird?
 
 
-\section{Modulo}
+\section{Modulo (1P)}
 Geben Sie mithilfe des Modulo-Operators \texttt{\%} die letzte Ziffer der in einer Variablen gespeicherten Ganzzahl (\inC{int}) aus.
 
 \emph{Hinweis: der Modulo-Operator gibt den Teilungsrest  zurück, also:}
@@ -73,15 +73,15 @@ Geben Sie mithilfe des Modulo-Operators \texttt{\%} die letzte Ziffer der in ein
 \end{center}
 (denn 12 ist durch 4 ohne Rest teilbar)
 
-\section{if-else und scanf}
+\section{if-else und scanf (1P)}
 Lesen Sie mit \texttt{scanf} eine \mintinline{c}{float}-Zahl $t$ ein. Prüfen Sie, ob \mbox{$1 + t$} größer als $1$ ist. 
 
-\emph{Optional}: Geben Sie \texttt{1e-20} ein. (Dies ist die Notation für $10^{-20}$.) Warum behauptet Ihr Programm, dass $1 + 10^{-20} \leq 1$?
+\emph{Optional (1P für eine gute Erklärung)}: Geben Sie \texttt{1e-20} ein. (Dies ist die Notation für $10^{-20}$.) Warum behauptet Ihr Programm, dass $1 + 10^{-20} \leq 1$?
 
 \emph{Lernziel: if/else}
 
 
-\section{Schaltjahr}
+\section{Schaltjahr (2P)}
 In unserem Kalender sind zum Ausgleich der astronomischen und kalendarischen
 Jahreslänge in regelmäßigen Abständen Schaltjahre eingebaut.
 Zur exakten Festlegung der Schaltjahre dienen die folgenden Regeln:
@@ -106,25 +106,21 @@ Tipp: Sparen Sie sich Zeit, und verzichten Sie zum Testen zuerst auf die Userein
 \emph{Lernziel: if/else, Operatoren}
 
 
-\section{Optional: Darstellung}
-Speichern Sie die Zahl $65$ in einer \inC{int}-Variablen,
-und geben Sie diese einmal mit dem Format \texttt{\%d},
-mit dem Format \verb`%x` und dem Format \verb`%c` aus.
-Erhöhen Sie die Variable um $1$ (dann um $2$, umd $3$...)
-und geben Sie sie wieder aus. 
-Wie könnte man das veränderte Ergebnis erklären?
+\section{Optional: Darstellung (1P)}
+Speichern Sie die Zahl $65$ in einer \inC{int}-Variablen, und geben Sie diese einmal mit dem Format \texttt{\%d}, mit dem Format \texttt{\%x} und dem Format \texttt{\%c} aus.
+Erhöhen Sie die Variable um $1$ (dann um $2$, umd $3$...) und geben Sie sie wieder aus. Wie könnte man das veränderte Ergebnis erklären?
 
 Tipp: Geben Sie in die Konsole ein: \texttt{man ascii}
 
 
-\section{Optional: Quadratische Gleichung}
-Lösen Sie die quadratische Gleichung $a\,x^2+b\,x+c=0$ für vom Benutzer
-(mit \texttt{scanf}) eingegebene Parameter $a$, $b$ und $c$.
-Bestimmen Sie, ob die Gleichung überhaupt lösbar ist.
-(Wenn Sie mit komplexen Zahlen vertraut sind, können dann
-auch die komplexe Lösung ausgeben.)
+\section{Optional: Quadratische Gleichung (1P)}
+Lösen Sie die quadratische Gleichung $a\,x^2+b\,x+c=0$ für vom Benutzer (mit \texttt{scanf}) eingegebene Parameter $a$, $b$ und $c$.
+Bestimmen Sie, ob die Gleichung überhaupt lösbar ist. (Wenn Sie mit komplexen Zahlen vertraut sind, können dann auch die komplexe Lösung ausgeben.)
 
-Die Lösungsformel lautet
+Zur Erinnerung: Die Lösungsformel lautet:
 \[x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4\,a\,c}}{2\,a}\]
+
+\emph{Tipp:}\\
+Zum Testen kostet es viel Zeit, immer wieder dieselben Werte für \texttt{a, b, c} einzugeben. Kommentieren Sie stattdessen die \texttt{scanf}-Abfrage zuerst aus, und arbeiten Sie mit festen Werten. Wenn Sie denken, Ihr Programm funktioniert, können Sie die Interaktivität wieder \enquote{dazuschalten}.
 
 \end{document}
