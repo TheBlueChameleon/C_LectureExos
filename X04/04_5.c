@@ -4,7 +4,7 @@
 
 // ========================================================================= //
 
-int palin (char * c) {
+int is_palindrome (char * c) {
   int length = strlen(c);
   
   for (int i = 0; i < length / 2; i++) {
@@ -23,6 +23,6 @@ int main () {
   
   printf("\"%s\" is %sa palindrome.\n",
     phrase,
-    palin(phrase)  ?  ""  :  "not "
+    is_palindrome(phrase)  ?  ""  :  "not "
   );
 }

@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 int main (void) {
-  double seed, interest, goal;
-  int years;
+  double seed = 0, interest = 0, goal = 0;
+  int years = 0;
   
   printf("Please enter your seed capital:\n");
   scanf("%lf", &seed);

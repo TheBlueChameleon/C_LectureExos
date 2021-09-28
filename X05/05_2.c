@@ -11,20 +11,23 @@ typedef struct {
 // ========================================================================= //
 
 void enterPerson(person_p array, int ID) {
-  char buffer[8192] = {};
-  
+  /* Note that ALL scanf format strings begin with a whitespace.
+   * We do not need that for the very first time, but enterPerson is called in
+   * a loop. That is, the scanf in line 24 is only the very first scanf for the
+   * first passage of the loop. Thereafter, the keyboard buffer is "polluted"
+   * with residual characters from entering the height of the previous person.
+   * ==> get rid of that by the whitespace trick.
+   */
+
   printf("please provide some information about person %d.\n", ID + 1);
   printf("What is their name?\n");
-  scanf("%20[ a-zA-Z]", array[ID].name);
-  setbuf(stdin, buffer);
-  
+  scanf(" %20[ a-zA-Z]", array[ID].name);
+
   printf("\nHow old are they?\n");
   scanf(" %d", &array[ID].age);
-  setbuf(stdin, buffer);
-  
+
   printf("\nHow tall are they?\n");
   scanf(" %lf", &array[ID].height);
-  setbuf(stdin, buffer);
   printf("\n");
 }
 

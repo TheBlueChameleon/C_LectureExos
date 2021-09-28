@@ -16,7 +16,7 @@ char cardValueChar(int cardCode) {
   if (value ==  0) {return 'A';}
   if (value <   9) {return value + '1';}
   if (value ==  9) {return 'X';}
-  if (value == 10) {return 'B';}
+  if (value == 10) {return 'J';}
   if (value == 11) {return 'Q';}
   if (value == 12) {return 'K';}
   

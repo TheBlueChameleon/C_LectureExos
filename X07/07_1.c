@@ -26,7 +26,7 @@ int main (int argc, char ** argv) {
     fread(&current, 1, 1, hFile);
     chars++;
     
-    if (current == ' ') {words ++;}
+    if (current == ' ' || current == '\n') {words ++;}
   }
   
   printf("Text file content counter (TFCC)\n\n");

@@ -13,20 +13,15 @@ typedef struct {
 // ========================================================================= //
 
 void enterPerson(person_p array, int ID) {
-  //char buffer[8192] = {};
-  
   printf("please provide some information about person %d.\n", ID + 1);
   printf("What is their name?\n");
   scanf(" %20[ a-zA-Z]", array[ID].name);
-  //setbuf(stdin, buffer);
   
   printf("\nHow old are they?\n");
   scanf(" %d", &array[ID].age);
-  //setbuf(stdin, buffer);
   
   printf("\nHow tall are they?\n");
   scanf(" %lf", &array[ID].height);
-  //setbuf(stdin, buffer);
   printf("\n");
 }
 
@@ -89,11 +84,13 @@ int main () {
   person_p people = malloc(N * sizeof(person_t));
   char filename[] = "phonebook.txt";
   
-  
+  // we could make it so that the user really enters all the information...
   //for (int i=0; i<N; i++) {
   //  enterPerson(people, i);
   //}
   
+  // ... but that takes too much time in testing. Instead, use default values
+  // and simulate the user input.
   strcpy(people[0].name, "Hans Wurst");
   people[0].age    = 99;
   people[0].height = 1.23;
